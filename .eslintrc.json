@@ -1,0 +1,26 @@
+{
+    "extends": ["airbnb-base", "eslint:recommended"],
+    "env": {
+        "node": true,
+        "es6": true,
+        "browser": true,
+        "mocha": true
+    },
+    "Globals": {
+        "process": true
+    },
+    "rules": {
+        // enable additional rules
+        "indent": ["error", 2],
+        "linebreak-style": [0, "unix"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+
+        // override default options for rules from base configurations
+        //"comma-dangle": ["error", "always"],
+        //"no-cond-assign": ["error", "always"],
+
+        // disable rules from base configurations
+        "no-console": "off"
+    }
+}
