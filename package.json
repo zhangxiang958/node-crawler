@@ -18,7 +18,8 @@
   "homepage": "https://github.com/zhangxiang958/node-crawler#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "config": "^1.30.0",
     "koa": "^2.5.0",
-    "request": "^2.85.0"
+    "superagent": "^3.8.2"
   }
 }

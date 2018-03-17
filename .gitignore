@@ -1,6 +1,7 @@
 logs/*.log
 coverage/
 src/app/public/*
+config/**
 !.gitignore
 node_modules
 .settings/
