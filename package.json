@@ -1,5 +1,5 @@
 {
-  "name": "crawler",
+  "name": "shawn-crawler",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/zhangxiang958/node-crawler#readme",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
     "config": "^1.30.0",
+    "crawler": "^1.1.2",
     "koa": "^2.5.0",
-    "superagent": "^3.8.2"
+    "mysql2": "^1.5.3",
+    "request": "^2.85.0",
+    "sequelize": "^4.37.6"
   }
 }

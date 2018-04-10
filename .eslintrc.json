@@ -6,9 +6,6 @@
         "browser": true,
         "mocha": true
     },
-    "Globals": {
-        "process": true
-    },
     "rules": {
         // enable additional rules
         "indent": ["error", 2],
