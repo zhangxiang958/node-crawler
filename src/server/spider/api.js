@@ -54,6 +54,7 @@ Api.getNewsContent = async function (id) {
   try {
     let res = await requestAsync(`http://news-at.zhihu.com/api/4/news/${id}`);
     let { body } = res;
+    body = JSON.parse(body);
     await articleService.add({
       title: body.title,
       article_id: body.id,
@@ -69,6 +70,7 @@ Api.getNewsLongComments = async function (id) {
   try {
     let res = await requestAsync(`http://news-at.zhihu.com/api/4/story/${id}/long-comments`);
     let { body } = res;
+    body = JSON.parse(body);
     let comments = body.comments;
     for (let comment of comments) {
       await commentService.add({
@@ -90,6 +92,7 @@ Api.getNewsShortComments = async function (id) {
   try {
     let res = await requestAsync(`http://news-at.zhihu.com/api/4/story/${id}/short-comments`);
     let { body } = res;
+    body = JSON.parse(body);
     let comments = body.comments;
     for (let comment of comments) {
       await commentService.add({

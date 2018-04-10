@@ -1,9 +1,7 @@
 // const koa = require('koa');
 const Crawler = require('crawler');
-
-const categoryService = require('../service/categoryService');
-
-// const zhihuEntryUrl = 'https://www.zhihu.com/topic/19897549/hot';
+// const Api = require('./api');
+const apiCrawler = require('./apiCrawler');
 
 const crawler = new Crawler({
   maxConnection: 1,
@@ -19,4 +17,6 @@ const crawler = new Crawler({
   }
 });
 
-crawler.queue(['https://www.zhihu.com/topic/19897549/hot']);
+
+// crawler.queue(['https://www.zhihu.com/topic/19897549/hot']);
+apiCrawler();

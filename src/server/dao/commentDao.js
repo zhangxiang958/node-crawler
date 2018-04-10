@@ -1,4 +1,4 @@
-const Comments = require('../model/summaryModel');
+const Comments = require('../model/commentModel');
 
 const commentDao = {};
 
