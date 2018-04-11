@@ -25,12 +25,14 @@ articleService.get = async function (id) {
   return await articleDao.get({ id });
 };
 
-articleService.getList = async function ({ id, title, content, article_id }) {
+articleService.getList = async function ({ id, title, content, article_id, offset, limit}) {
   let query = {
     id,
     title,
     content,
-    article_id
+    article_id,
+    offset,
+    limit
   };
   return await articleDao.getList(query);
 };

@@ -7,14 +7,37 @@ const articleService = require('../service/articleService');
 const commentService = require('../service/commentService');
 
 const { promisify } = util;
-const requestAsync = promisify(request);
 const Api = {};
+
+// 代理服务器
+const proxyHost = 'http-dyn.abuyun.com';
+const proxyPort = 9020;
+
+// 代理隧道验证信息
+const proxyUser = 'H0W6K2ORQFQ0J72D';
+const proxyPass = '10D9F4EBB6BE077A';
+
+const proxyUrl = `http://${proxyUser}:${proxyPass}@${proxyHost}:${proxyPort}`;
+
+const proxiedRequest = request.defaults({ 'proxy': proxyUrl });
+
+const requestAsync = promisify(request);
+const proxiedRequestAsync = promisify(proxiedRequest);
 
 // 获取日报列表
 Api.getCatory = async function () {
+  
+  const options = {
+    url: 'http://news-at.zhihu.com/api/4/themes',
+    headers: {
+      'Proxy-Switch-Ip': 'yes'
+    }
+  };
+
   try {
-    let res = await requestAsync('http://news-at.zhihu.com/api/4/themes');
+    let res = await proxiedRequestAsync(options);
     let { body } = res;
+    console.log(body);
     body = JSON.parse(body);
     let list = body.others;
     for (let category of list) {
@@ -31,9 +54,18 @@ Api.getCatory = async function () {
 };
 
 // 获取日报内容
-Api.getDailtList = async function (id) {
+Api.getDailyList = async function (id) {
+
+  const options = {
+    url: `http://news-at.zhihu.com/api/4/theme/${id}`,
+    headers: {
+      'Proxy-Switch-Ip': 'yes'
+    }
+  };
+
   try {
-    let res = await requestAsync(`http://news-at.zhihu.com/api/4/theme/${id}`);
+    console.log(`requesting http://news-at.zhihu.com/api/4/theme/${id}`);
+    let res = await proxiedRequestAsync(options);
     let { body } = res;
     body = JSON.parse(body);
     let stories = body.stories;
@@ -41,7 +73,7 @@ Api.getDailtList = async function (id) {
       await summaryService.add({
         title: story.title,
         summary_id: String(story.id),
-        type: 0
+        type: id
       });
     }
   } catch (err) {
@@ -51,8 +83,17 @@ Api.getDailtList = async function (id) {
 
 // 获取文章详情
 Api.getNewsContent = async function (id) {
+
+  const options = {
+    url: `http://news-at.zhihu.com/api/4/news/${id}`,
+    headers: {
+      'Proxy-Switch-Ip': 'yes'
+    }
+  };
+
   try {
-    let res = await requestAsync(`http://news-at.zhihu.com/api/4/news/${id}`);
+    console.log(`requesting http://news-at.zhihu.com/api/4/news/${id}`);
+    let res = await proxiedRequestAsync(options);
     let { body } = res;
     body = JSON.parse(body);
     await articleService.add({
@@ -67,17 +108,27 @@ Api.getNewsContent = async function (id) {
 
 // 获取文章长评论
 Api.getNewsLongComments = async function (id) {
+
+  const options = {
+    url: `http://news-at.zhihu.com/api/4/story/${id}/long-comments`,
+    headers: {
+      'Proxy-Switch-Ip': 'yes'
+    }
+  };
+
   try {
-    let res = await requestAsync(`http://news-at.zhihu.com/api/4/story/${id}/long-comments`);
+    console.log(`request http://news-at.zhihu.com/api/4/story/${id}/long-comments`);
+    let res = await proxiedRequestAsync(options);
     let { body } = res;
     body = JSON.parse(body);
     let comments = body.comments;
     for (let comment of comments) {
+      let content = comment.content.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, '');
       await commentService.add({
         author: comment.author,
         article_id: id,
         comment_id: comment.id,
-        content: comment.content,
+        content: content,
         likes: body.likes,
         type: 0
       });
@@ -89,17 +140,27 @@ Api.getNewsLongComments = async function (id) {
 
 // 获取文章短评论
 Api.getNewsShortComments = async function (id) {
+
+  const options = {
+    url: `http://news-at.zhihu.com/api/4/story/${id}/short-comments`,
+    headers: {
+      'Proxy-Switch-Ip': 'yes'
+    }
+  };
+
   try {
-    let res = await requestAsync(`http://news-at.zhihu.com/api/4/story/${id}/short-comments`);
+    console.log(`request http://news-at.zhihu.com/api/4/story/${id}/long-comments`);
+    let res = await proxiedRequestAsync(options);
     let { body } = res;
     body = JSON.parse(body);
     let comments = body.comments;
     for (let comment of comments) {
+      let content = comment.content.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, '');
       await commentService.add({
         author: comment.author,
         article_id: id,
         comment_id: comment.id,
-        content: comment.content,
+        content: content,
         likes: body.likes,
         type: 1
       });
@@ -111,8 +172,17 @@ Api.getNewsShortComments = async function (id) {
 
 // 历史信息
 Api.getHistiory = async function (date) {
+
+  const options = {
+    url: `http://news.at.zhihu.com/api/4/news/before/${date}`,
+    headers: {
+      'Proxy-Switch-Ip': 'yes'
+    }
+  };
+
   try {
-    let res = await requestAsync(`http://news.at.zhihu.com/api/4/news/before/${date}`);
+    console.log(`requesting http://news.at.zhihu.com/api/4/news/before/${date}`);
+    let res = await proxiedRequestAsync(options);
     let { body } = res;
     body = JSON.parse(body);
     let stories = body.stories;

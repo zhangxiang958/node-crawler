@@ -4,7 +4,6 @@ const summaryDao = {};
 
 summaryDao.add = async function (params) {
   const { title, type, summary_id } = params;
-  console.log(summary_id);
   let id = await Summary.create({ title, type, summary_id });
   return id;
 };

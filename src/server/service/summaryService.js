@@ -25,12 +25,14 @@ summaryService.get = async function (id) {
   return await summaryDao.get({ id });
 };
 
-summaryService.getList = async function ({ id, title, type, summary_id }) {
+summaryService.getList = async function ({ id, title, type, summary_id, offset, limit }) {
   let query = {
     id,
     title,
     type,
-    summary_id
+    summary_id,
+    offset,
+    limit
   };
   return await summaryDao.getList(query);
 };

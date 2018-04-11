@@ -25,12 +25,14 @@ categoryService.get = async function (id) {
   return await categoryDao.get({ id });
 };
 
-categoryService.getList = async function ({ id, name, type, description }) {
+categoryService.getList = async function ({ id, name, type, description, limit, offset }) {
   let query = {
     id,
     name,
     type,
-    description
+    description,
+    limit,
+    offset
   };
   return await categoryDao.getList(query);
 };
