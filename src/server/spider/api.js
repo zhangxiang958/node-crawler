@@ -21,7 +21,7 @@ const proxyUrl = `http://${proxyUser}:${proxyPass}@${proxyHost}:${proxyPort}`;
 
 const proxiedRequest = request.defaults({ 'proxy': proxyUrl });
 
-const requestAsync = promisify(request);
+// const requestAsync = promisify(request);
 const proxiedRequestAsync = promisify(proxiedRequest);
 
 // 获取日报列表

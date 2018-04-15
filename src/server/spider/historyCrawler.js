@@ -1,26 +1,12 @@
-// const Crawler = require('crawler');
-const Api = require('./api');
 const CronJob = require('cron').CronJob;
+const Api = require('./api');
 
 const summaryService = require('../service/summaryService');
 const articleService = require('../service/articleService');
 
 const redis = require('../service/redis');
-const dateJson = require('./util/date.json').data;
-// const crawler = new Crawler({
-//   maxConnection: 1,
-//   rateLimit: 1000,
-//   callback: (err, res, done) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       const $ = res.$;
-//       console.log($('#data').attr('data-state'));
-//     }
-//     done();
-//   }
-// });
-// crawler.queue(['https://www.zhihu.com/topic/19897549/hot']);
+const dateJson = require('./util/date.json');
+
 const limit = 5;
 
 const getArticleContent = async function () {
@@ -71,7 +57,7 @@ const getShortComments = async function () {
 
 const start = async function () {
   const mainCronJob = new CronJob('*/5 * * * * *', async () => {
-    let offset = redis.get('dateOffset') || 0;
+    let offset = await redis.get('dateOffset') || 0;
     let index = +offset;
     let dates = dateJson.slice(index, index + 5);
     let promies = dates.map(async (d) => {
@@ -90,3 +76,5 @@ const start = async function () {
   getLongCommentsJob.start();
   getShortCommentsJob.start();
 };
+
+start();
