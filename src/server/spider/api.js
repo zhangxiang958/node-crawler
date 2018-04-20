@@ -1,28 +1,11 @@
-const util = require('util');
-const request = require('request');
+const proxiedRequestAsync = require('./util/proxiedRequest');
 
 const categoryService = require('../service/categoryService');
 const summaryService = require('../service/summaryService');
 const articleService = require('../service/articleService');
 const commentService = require('../service/commentService');
 
-const { promisify } = util;
 const Api = {};
-
-// 代理服务器
-const proxyHost = 'http-dyn.abuyun.com';
-const proxyPort = 9020;
-
-// 代理隧道验证信息
-const proxyUser = 'H0W6K2ORQFQ0J72D';
-const proxyPass = '10D9F4EBB6BE077A';
-
-const proxyUrl = `http://${proxyUser}:${proxyPass}@${proxyHost}:${proxyPort}`;
-
-const proxiedRequest = request.defaults({ 'proxy': proxyUrl });
-
-// const requestAsync = promisify(request);
-const proxiedRequestAsync = promisify(proxiedRequest);
 
 // 获取日报列表
 Api.getCatory = async function () {
