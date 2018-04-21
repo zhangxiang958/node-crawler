@@ -15,7 +15,11 @@ NeteaseHotListDao.get = async function (params) {
 };
 
 NeteaseHotListDao.getList = async function (params = {}) {
-  return await NeteaseHotList.findAll(params);
+  return await NeteaseHotList.findAll({ 
+    where: {
+      ...params
+    }
+  });
 };
 
 NeteaseHotListDao.delete = async function (params) {

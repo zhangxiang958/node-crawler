@@ -34,6 +34,13 @@ neteaseHotListService.getList = async function ({ id, song_id, if_get_comment, o
     offset,
     limit
   };
+
+  Object.keys(query).forEach((k) => {
+    if (undefined === query[k]) {
+      Reflect.deleteProperty(query, k);
+    }
+  });
+  
   return await neteaseHotlistDao.getList(query);
 };
 
