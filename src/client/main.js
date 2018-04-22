@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom';
 import Router   from './router/index';
 
 ReactDOM.render(
-    Router,
-    document.getElementById('app')
+  Router,
+  document.getElementById('app')
 );

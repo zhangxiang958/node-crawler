@@ -8,16 +8,16 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, '../client/src/main.js')
+    path.resolve(__dirname, '../client/main.js')
   ],
   output: {
-    path: path.join(__dirname, '../client/build/'),
+    path: path.resolve(__dirname, '../client/build/'),
     filename: '[name].js',
     publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: '../client/src/index.html',
+      template: path.resolve(__dirname, '../client/index.html'),
       inject: 'body',
       filename: 'index.html'
     }),
@@ -46,6 +46,9 @@ module.exports = {
       // 专供iconfont方案使用的，后面会带一串时间戳，需要特别匹配到
       test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
       loader: 'file-loader?name=./static/fonts/[name].[ext]',
+    },{
+      test: /\.(png|jpg)$/,
+      loader: 'url-loader?limit=8192'
     }]
   }
 };

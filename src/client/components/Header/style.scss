@@ -1,0 +1,29 @@
+.Header {
+  box-sizing: border-box;
+  position: relative;
+  padding: 15px;
+  height: 76px;
+  color: #fff;
+  background: #323436;
+}
+
+.Header-icon {
+  display: block;
+  width: 150px;
+  height: 45px;
+  background: url('../../static/img/175x69_1.png') 50% no-repeat;
+  background-size: 100%;
+}
+
+.Header-name {
+  position: absolute;
+  top: 50%;
+  left: 180px;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.Header-author {
+  width: 200px;
+  float: right;
+}

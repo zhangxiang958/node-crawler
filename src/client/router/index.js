@@ -16,15 +16,15 @@ import App 							from '../views/App.jsx';
 
 const router = (
   <Router>
-      <App>
-          <Switch>
-            {/*<Route exact path="/" component={ Home } />*/}
-            {/*<Route path="/posts/:postName" component={ Post } />
+    <App>
+      <Switch>
+        {/*<Route exact path="/" component={ Home } />*/}
+        {/*<Route path="/posts/:postName" component={ Post } />
             <Route path="/archives" component={ Archives } />
             <Route path="/categories" component={ CategoriesRouter } />
             <Route path="*" component={NotFount} />*/}
-          </Switch>
-      </App>
+      </Switch>
+    </App>
   </Router>
 );
 
