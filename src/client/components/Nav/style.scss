@@ -4,27 +4,22 @@
 }
 
 .nav-list {
+  height: 100%;
   list-style: none;
   white-space: nowrap;
+  border-bottom: 1px solid #e2e2e2;
+  box-shadow: 0 1px 1px #e2e2e2;
+  text-align: right;
   li {
     box-sizing: border-box;
     display: inline-block;
-    width: 50%;
+    width: 20%;
     height: 35px;
     line-height: 35px;
     text-align: center;
   }
-  a {
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    color: #000;
-  }
   li a:hover {
-    border-bottom: 5px solid #488fce;
-  }
-  li a:active {
-    border-bottom: 5px solid #488fce;
+    color: #488fce;
   }
 }
 

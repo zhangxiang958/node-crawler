@@ -15,9 +15,8 @@ class App extends React.Component {
       <div>
         <Header></Header>
         <Layout>
-          <Nav>
-            
-          </Nav>
+          <Nav></Nav>
+          { this.props.children }
         </Layout>
       </div>
     );

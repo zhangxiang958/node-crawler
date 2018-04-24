@@ -1,0 +1,185 @@
+.index-header {
+  margin-top: 50px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  background: #eee;
+}
+
+.textarea-container {
+  margin: 0 auto;
+  width: 95%;
+}
+
+.textarea {
+  resize: none;
+  box-sizing: border-box;
+  margin-top: 20px;
+  padding: 15px;
+  width: 100%;
+  height: 170px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #979797;
+}
+
+.submit {
+  float: right;
+  margin-top: 22px;
+  width: 112px;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  background-color: #488fce;
+  cursor: pointer;
+}
+
+.result {
+  position: relative;
+  margin-top: 30px;
+}
+
+.section-item {
+  margin: 40px 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 400px;
+  padding: 20px;
+  background: #eee;
+}
+
+.overview-title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.overview-content {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 95%;
+  padding-right: 30%;
+}
+
+.overview-result {
+  padding: 20px;
+}
+
+.words {
+  margin-top: 20px;
+  dd {
+    display: inline-block;
+    padding: 0 11px;
+    height: 26px;
+    font-size: 14px;
+    line-height: 26px;
+    margin: 0 5px 5px 0;
+  }
+}
+
+.word-mean {
+  position: absolute;
+  top: 5%;
+  right: 0;
+  width: 25%;
+  dt {
+    margin-bottom: 22px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #979797;
+  }
+  dd {
+    display: inline-block;
+    padding: 0 11px;
+    height: 26px;
+    font-size: 14px;
+    line-height: 26px;
+    margin: 0 5px 5px 0;
+  }
+}
+
+.key-table {
+  margin-top: 10px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 28px;
+  color: #979797;
+  background-color: #fff;
+  border-collapse: collapse;
+  border-spacing: 0;
+  thead {
+    background-color: #488fce;
+    color: #fff;
+    td {
+      text-align: center;
+      border: 1px solid #488fce;
+    }
+  }
+  tbody {
+    td {
+      width: 50%;
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      text-align: center;
+    }
+  }
+}
+
+
+
+.t {
+  background-color: #c7aee7;
+}
+.w, .wd, .wk, .wj, .wn {
+  background-color: #ccc;
+}
+.v, .vi {
+  background-color: #ffcb99;
+}
+.u, .ud {
+  background-color: #4dd9e6;
+}
+.n {
+  background-color: #488fce;
+}
+.p {
+  background-color: #99cc67;
+}
+.ns {
+  background-color: #d07f7f;
+}
+.y {
+  background-color: #f48363;
+}
+.nr {
+  background-color: #50c6fb;
+}
+.c {
+  background-color: #8ea4de;
+}
+.a {
+  background-color: #67ccaa;
+}
+.d {
+  background-color: #ffcccb;
+}
+.r {
+  background-color: #9acccd;
+}
+.m {
+  background-color: #986699;
+}
+.s {
+  background-color: #cee887;
+}
+.f {
+  background-color: #c9aaca;
+}
+.q {
+  background-color: #ff9899;
+}
