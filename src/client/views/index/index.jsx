@@ -20,6 +20,7 @@ class Single extends React.Component {
 
   submit() {
     alert('???');
+    console.log(this.state.test);
   }
 
   componentDidMount() {
@@ -69,7 +70,7 @@ class Single extends React.Component {
             value={this.state.test} 
             onChange={this.change.bind(this)}>
             </textarea>
-            <a className="submit" onClick={this.submit}>提交文本</a>
+            <a className="submit" onClick={this.submit.bind(this)}>提交文本</a>
           </div>
         </div>
         <div className="result">

@@ -1,41 +1,23 @@
 const http = require('http');
-const koa = require('koa');
-const request = require('superagent');
-const cheerio = require('cheerio');
+const Koa = require('koa');
+const Router = require('koa-router');
 
-const targetUrl = 'https://cnodejs.org/';
-const zhihu = 'https://www.zhihu.com/topic/19593368/top-answers';
+const apiRouterMiddleware = require('./router/apiMiddleware');
 
-async function app () {
-  let { text } = await request.get(targetUrl);
-  const $ = cheerio.load(text);
-  const items = [];
-  $('#topic_list .topic_title').each((idx, ele) => {
-    let $element = $(ele);
-    items.push({
-      title: $element.attr('title'),
-      href: $element.attr('href')
-    });
-  });
+const PORT = 8989;
+const app = new Koa();
+const router = new Router();
 
-  console.log(items);
-}
+app.use(async (ctx, next) => {
+  ctx.response.body = 'hello world';
+  await next();
+});
 
-// app();
+app.use(apiRouterMiddleware);
 
-async function zhihuData () {
-  let { text } = await request.get(zhihu);
-  const $ = cheerio.load(text);
-  const items = [];
-  $('#TopicMain .Card .List .List-item .ContentItem').each((idx, ele) => {
-    let $element = $(ele);
-    items.push({
-      title: $element.attr('data-zop'),
-      href: $element.attr('href')
-    });
-  });
 
-  console.log(items);
-}
+const server = http.createServer(app.callback());
 
-zhihuData();
+server.listen(PORT, '127.0.0.1', () => {
+  console.log(`Server is listening on port ${PORT}`);
+});

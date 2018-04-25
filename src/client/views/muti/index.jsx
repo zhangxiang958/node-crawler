@@ -36,6 +36,16 @@ class MutiPage extends React.Component {
               情感分析:
               <div className="item">
                 fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                fhnsdjkfhsdjklhfklsdfjsdklfhdlk
+                <div className="precent">
+                  98%
+                </div>
               </div>
             </div>
           </div>
