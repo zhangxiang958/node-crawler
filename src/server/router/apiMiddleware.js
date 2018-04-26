@@ -13,8 +13,7 @@ controllers.forEach((controller) => {
   });
 });
 
-module.exports = () => {
+module.exports = () => 
   Router()
-    .use('/', () => { router.routes(), router.allowedMethods() })
+    .use('', router.routes(), router.allowedMethods())
     .routes();
-};
