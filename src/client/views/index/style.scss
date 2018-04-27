@@ -52,6 +52,14 @@
   background: #eee;
 }
 
+#overview-key {
+  height: auto;
+}
+
+#overview-analysis {
+  height: auto;
+}
+
 .overview-title {
   font-size: 15px;
   font-weight: 500;
@@ -135,16 +143,16 @@
 .t {
   background-color: #c7aee7;
 }
-.w, .wd, .wk, .wj, .wn {
+.w, .wd, .wk, .wj, .wn, .ww, .ws {
   background-color: #ccc;
 }
-.v, .vi {
+.v, .vi, .vyou {
   background-color: #ffcb99;
 }
-.u, .ud {
+.u, .ud, .ude, .uyy {
   background-color: #4dd9e6;
 }
-.n {
+.n, .nx {
   background-color: #488fce;
 }
 .p {

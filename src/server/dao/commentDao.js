@@ -15,7 +15,7 @@ commentDao.get = async function (params) {
 };
 
 commentDao.getList = async function (params = {}) {
-  return await Comments.findAll(params);
+  return await Comments.findAll({ where: { ...params } });
 };
 
 commentDao.delete = async function (params) {

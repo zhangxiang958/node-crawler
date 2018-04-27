@@ -6,7 +6,7 @@ const nlpApi = {};
 
 nlpApi.sentiment = (textArr) => {
   return new Promise((resolve, reject) => {
-    nlp.sentiment(data, (data) => {
+    nlp.sentiment(textArr, (data) => {
       resolve(data);
     });
   });

@@ -8,6 +8,16 @@ const apiRouterMiddleware = require('./router/apiMiddleware');
 const PORT = 8989;
 const app = new Koa();
 
+app.use(async (ctx, next) => {
+  ctx.set('Access-Control-Allow-Origin', 'http://0.0.0.0:3000');
+  ctx.set('Access-Control-Allow-Headers', 'Content-Type');
+  if (ctx.request.method == 'OPTIONS') {
+    ctx.response.status = 200;
+  } else {
+    await next();
+  }
+})
+
 app.use(compose([
   bodyParser(),
   apiRouterMiddleware()

@@ -25,13 +25,22 @@ commentService.get = async function (id) {
   return await commentDao.get({ id });
 };
 
-commentService.getList = async function ({ id, author, type, article_id }) {
+commentService.getList = async function ({ id, author, type, article_id, offset, limit }) {
   let query = {
     id,
     author,
     type,
-    article_id
+    article_id,
+    offset,
+    limit
   };
+  
+  Object.keys(query).forEach((key) => {
+    if (undefined === query[key] || null === query[key]) {
+      Reflect.deleteProperty(query, key);
+    }
+  });
+
   return await commentDao.getList(query);
 };
 

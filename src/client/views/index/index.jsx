@@ -2,29 +2,65 @@ import React from 'react';
 import Echarts from 'echarts';
 import Style from './style.scss';
 
+import Api from '../../lib/api.js';
+
 class Single extends React.Component {
   constructor(...props) {
     super(...props);
 
     this.state = {
-      test: '用户最终接受了就说明这个设计审美好看了？excuse me ？用户只是无法改变这些设计，最终无奈的接受并习惯了好嘛……就像在有异味的房间待久了就觉察不到异味一样，接受了并不代表没有"异味"。我认为好设计应该像一阵新风，用户在解除的瞬间就会感觉身心愉悦，心悦诚服且心向往之。当然不否认一些有深度的设计需要时间来慢慢领会，但有些很shit的东西也不要吃了还硬说好吃......'
+      text: "用户最终接受了就说明这个设计审美好看了？excuse me ？用户只是无法改变这些设计，最终无奈的接受并习惯了好嘛……就像在有异味的房间待久了就觉察不到异味一样，接受了并不代表没有'异味'。我认为好设计应该像一阵新风，用户在解除的瞬间就会感觉身心愉悦，心悦诚服且心向往之。当然不否认一些有深度的设计需要时间来慢慢领会，但有些很shit的东西也不要吃了还硬说好吃......",
+      keywords: [],
+      tags: [],
+      sentiment: []
     }
+
+    this.sendRequest();
   }
 
-  change(e) {
-    console.log(e.target.value);
+  sendRequest() {
+    Api.sentimentAnalysisSingle(this.state.text).then(res => {
+      console.log('sentiment:', res);
+      [res] = JSON.parse(res);
+      console.log(res);
+      this.renderChart(res[0], res[1]);
+    });
+
+    Api.tagAnalysis(this.state.text).then(res => {
+      console.log('tagAnalysis:', res);
+      let [result] = JSON.parse(res.result);
+      let { word, tag } = result;
+      let data = word.map((w, i) => {
+        return {
+          word: w,
+          tag: tag[i]
+        }
+      });
+      this.setState({
+        tags: data
+      });
+    });
+
+    Api.extractKeywords([this.state.text]).then(res => {
+      console.log('extractKeywords:', res);
+      let [result] = res.result;
+      this.setState({
+        keywords: result
+      });
+    });
+  }
+  
+  changeText(e) {
     this.setState({
-      test: e.target.value
+      text: e.target.value
     });
   }
 
   submit() {
-    alert('???');
-    console.log(this.state.test);
+    this.sendRequest();
   }
 
-  componentDidMount() {
-    console.log('mount');
+  renderChart(positive, negative) {
     const myChart = Echarts.init(document.getElementById('overview-emotion'));
     myChart.setOption({
       title : {
@@ -47,8 +83,8 @@ class Single extends React.Component {
         radius : '55%',
         center: ['50%', '60%'],
         data:[
-            {value:335, name:'正面'},
-            {value:310, name:'负面'}
+            {value: positive, name:'正面'},
+            {value: negative, name:'负面'}
         ],
         itemStyle: {
             emphasis: {
@@ -61,14 +97,19 @@ class Single extends React.Component {
     });
   }
 
+  componentDidMount() {
+    console.log('mount');
+    // this.renderChart(0.333, 0.222);
+  }
+
   render () {
     return (
       <div>
         <div className="index-header">
           <div className="textarea-container">
             <textarea name="" id="" cols="30" rows="10" className="textarea" 
-            value={this.state.test} 
-            onChange={this.change.bind(this)}>
+            value={this.state.text} 
+            onChange={this.changeText.bind(this)}>
             </textarea>
             <a className="submit" onClick={this.submit.bind(this)}>提交文本</a>
           </div>
@@ -87,7 +128,14 @@ class Single extends React.Component {
               <div className="overview-content">
                 <div className="overview-result">
                   <dl className="words">
-                    <dd title="时间词" className="t">15日</dd>
+                    {
+                      this.state.tags.map((t, i) => {
+                        return (
+                          <dd key={i} className={ t.tag }>{ t.word }</dd>
+                        );
+                      })
+                    }
+                    {/*<dd title="时间词" className="t">15日</dd>
                     <dd title="标点符号" className="wd">，</dd>
                     <dd title="动词" className="v">备受</dd>
                     <dd title="动词" className="v">关注</dd>
@@ -123,7 +171,7 @@ class Single extends React.Component {
                     <dd title="名词" className="n">电影</dd>
                     <dd title="动词" className="v">确定</dd>
                     <dd title="副词" className="d">将</dd>
-                    <dd title="介词" className="p">于</dd>
+                    <dd title="介词" className="p">于</dd>*/}
                   </dl>
                 </div>
                 <dl className="word-mean">
@@ -160,26 +208,16 @@ class Single extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>黄金时代</td>
-                        <td>39</td>
-                      </tr>
-                      <tr>
-                        <td>萧军</td>
-                        <td>32</td>
-                      </tr>
-                      <tr>
-                        <td>萧红</td>
-                        <td>28</td>
-                      </tr>
-                      <tr>
-                        <td>电影</td>
-                        <td>27</td>
-                      </tr>
-                      <tr>
-                        <td>端木蕻良</td>
-                        <td>18</td>
-                      </tr>
+                      {
+                        this.state.keywords.map((keyword, i) => {
+                          return (
+                            <tr key={i}>
+                              <td>{ keyword[1] }</td>
+                              <td>{ (keyword[0] * 100).toFixed(2) }</td>
+                            </tr>
+                          );
+                        })
+                      }
                     </tbody>
                   </table>
                 </div>
