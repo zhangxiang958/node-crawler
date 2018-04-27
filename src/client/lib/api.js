@@ -74,7 +74,7 @@ Api.extractKeywords = function (textArr) {
 
 Api.getZhihuCommentList = function () {
   return new Promise((resolve, reject) => {
-    request.get(`http://${HOST}:${PORT}/getZhihuLongCommentList`, {
+    request.get(`http://${HOST}:${PORT}/getZhihuCommentList`, {
       data: {
         offset: 0,
         limit: 100
