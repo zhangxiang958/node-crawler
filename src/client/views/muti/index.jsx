@@ -44,6 +44,9 @@ class MutiPage extends React.Component {
           precent: res[i][0]
         }
       });
+      this.setState({
+        text: textArr
+      });
     });
   }
 
