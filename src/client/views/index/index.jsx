@@ -61,6 +61,7 @@ class Single extends React.Component {
   }
 
   renderChart(positive, negative) {
+    console.log('111', positive, negative);
     const myChart = Echarts.init(document.getElementById('overview-emotion'));
     myChart.setOption({
       title : {
@@ -83,8 +84,8 @@ class Single extends React.Component {
         radius : '55%',
         center: ['50%', '60%'],
         data:[
-            {value: positive, name:'正面'},
-            {value: negative, name:'负面'}
+            {value: +positive, name:'正面'},
+            {value: +negative, name:'负面'}
         ],
         itemStyle: {
             emphasis: {

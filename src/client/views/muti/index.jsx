@@ -75,7 +75,7 @@ class MutiPage extends React.Component {
         </div>
         <div className="result">
           <div className="result-section">
-            <div id="overview-emotion" className="section-item">
+            <div id="overview-emotion-muti" className="section-item">
               情感分析(正面情绪):
               { 
                 this.state.text.map((item, i) => {

@@ -16,7 +16,8 @@ const sentimentSingle = api.post('/sentiment/single', async (ctx, next) => {
 // 多文本情感分析
 const sentimentMultiple = api.post('/sentiment/multiple', async (ctx, next) => {
   const textArr = ctx.request.body.textArr || [];
-  let data = await nlp.sentiment(textArr);
+  let payLoad = textArr.map((t) => { return t.text; });
+  let data = await nlp.sentiment(payLoad);
   console.log('sentimentMultiple result:', data);
   ctx.body = data;
 });
